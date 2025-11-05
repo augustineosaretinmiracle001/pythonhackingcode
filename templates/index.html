@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Python Web App!</h1>
+        <p>This is a Flask application ready for deployment.</p>
+        
+        <div class="api-test">
+            <h2>API Test</h2>
+            <input type="text" id="nameInput" placeholder="Enter your name">
+            <button onclick="testAPI()">Test API</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
