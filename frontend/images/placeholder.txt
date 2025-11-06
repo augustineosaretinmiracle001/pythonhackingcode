@@ -1,0 +1,17 @@
+Place the following images in this directory:
+
+Required Images:
+- favicon.ico (website icon)
+- logo.png (main logo)
+- slide1.jpg (hero banner image)
+- partners-logo.png (partners banner)
+- logof.png (Facebook logo for voting)
+- logoi.png (Instagram logo for voting)
+
+You can use placeholder images or create your own images for these files.
+
+Image sizes recommended:
+- logo.png: 200x100px
+- slide1.jpg: 1200x400px
+- partners-logo.png: 800x200px
+- logof.png, logoi.png: 50x50px each

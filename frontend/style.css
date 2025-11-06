@@ -1,0 +1,158 @@
+/* Arab Asia Starz Voting System Styles */
+.video video{max-height:450px;}
+.none{display:none;} 
+h1{color:#ffffff;}
+.card.text-center{margin-bottom:10px;}
+.alert{text-align:center;}
+.alert .close{display:none;}
+.sub_nav{width:40%;margin: 20px auto;}
+.nav_link:hover{background-color: #3e8e41;}
+.sub_nav .nav-link{background: #a64ac9;margin:3px;color:#ffffff;}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #ca0076;
+}
+.subnav:hover .ul_subnav{display:block !important;}
+.ul_subnave{display:none;list-style:none;position:absolute;}
+.ul_subnave li{background: #a64ac9;margin:3px;color:#ffffff;}
+.ul_subnave li{background: #a64ac9; margin: 3px; padding: 9px 38px; color: #ffffff; margin-left: -16px; border-radius: 4px;}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #a64ac9;
+  color: white;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Custom Styles */
+body {
+    background: white;
+    font-family: Arial, sans-serif;
+}
+
+.top-shade {
+    height: 10px;
+    background: linear-gradient(90deg, #ca0076, #a64ac9);
+}
+
+.logo {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+}
+
+.heading {
+    text-align: center;
+    padding: 30px 0;
+    background: rgba(0,0,0,0.7);
+    margin: 20px 0;
+}
+
+.heading h1, .heading h2 {
+    color: white;
+    margin: 0;
+}
+
+#about-s3 {
+    background: rgba(255,255,255,0.9);
+    padding: 40px 0;
+    margin: 20px 0;
+}
+
+#about-s3 p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.partners-block {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.partners-block img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card video {
+    width: 100%;
+    max-height: 300px;
+}
+
+.vote {
+    background: #ca0076;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+.vote:hover {
+    background: #a64ac9;
+}
+
+.register-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.register-btn:hover {
+    background: #218838;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sub_nav {
+        width: 90%;
+    }
+    
+    .logo img {
+        max-width: 150px;
+    }
+}
